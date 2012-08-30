@@ -27,7 +27,8 @@ package
 		
 		private var first:Class=FirstContent;
 		private var second:Class = SecondContent;
-		private var third:Class=ThirdContent;
+		private var third:Class = ThirdContent;
+		private var fourth:Class = FourthContent;
 		
 		public function Preloader() 
 		{
@@ -39,7 +40,7 @@ package
 			loaderInfo.addEventListener(ProgressEvent.PROGRESS, progress);
 			loaderInfo.addEventListener(IOErrorEvent.IO_ERROR, ioError);
 			
-			contentNameList = ["FirstContent","SecondContent","ThirdContent"];
+			contentNameList = ["FirstContent","SecondContent","ThirdContent","FourthContent"];
 			
 			// TODO show loader
 		}
