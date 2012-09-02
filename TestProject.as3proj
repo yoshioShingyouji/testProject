@@ -8,7 +8,7 @@
     <movie fps="30" />
     <movie width="800" />
     <movie height="600" />
-    <movie version="10" />
+    <movie version="11" />
     <movie minorVersion="1" />
     <movie platform="Flash Player" />
     <movie background="#FFFFFF" />
@@ -40,7 +40,7 @@
     <option linkReport="" />
     <option loadExterns="" />
     <option staticLinkRSL="True" />
-    <option additional="" />
+    <option additional="-swf-version=13" />
     <option compilerConstants="" />
     <option minorVersion="" />
   </build>
@@ -51,6 +51,7 @@
   <!-- SWC Libraries -->
   <libraryPaths>
     <element path="lib\fl.swc" />
+    <element path="lib\away3d-core-fp11_4_0_9_gold.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
@@ -83,7 +84,7 @@
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />
-    <option testMovie="Default" />
+    <option testMovie="ExternalPlayer" />
   </options>
   <!-- Plugin storage -->
   <storage />

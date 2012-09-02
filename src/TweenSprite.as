@@ -2,11 +2,9 @@ package
 {
 	import fl.motion.easing.Bounce;
 	import fl.motion.easing.Elastic;
-	import fl.motion.Motion;
-	import fl.transitions.Transition;
+	import fl.transitions.Tween;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import fl.transitions.Tween;
 
 	/**S
 	 * ...

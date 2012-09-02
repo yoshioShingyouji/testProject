@@ -1,6 +1,5 @@
 package 
 {
-	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
@@ -9,10 +8,7 @@ package
 	import flash.events.MouseEvent;
 	import flash.events.ProgressEvent;
 	import flash.utils.getDefinitionByName;
-	import ContentBase;
-	import FirstContent;
-	import SecondContent;
-	
+
 	/**
 	 * ...
 	 * @author Yoshio_SHINGYOUJI
@@ -25,10 +21,12 @@ package
 		private var displaingContent	:ContentBase;
 		private var nextContent			:ContentBase;
 		
-		private var first:Class=FirstContent;
-		private var second:Class = SecondContent;
-		private var third:Class = ThirdContent;
-		private var fourth:Class = FourthContent;
+		private var first	:Class = FirstContent;
+		private var second	:Class = SecondContent;
+		private var third	:Class = ThirdContent;
+		private var fourth	:Class = FourthContent;
+		private var fifth	:Class = FifthContent;
+		private var sixth	:Class = SixthContent;
 		
 		public function Preloader() 
 		{
@@ -40,7 +38,7 @@ package
 			loaderInfo.addEventListener(ProgressEvent.PROGRESS, progress);
 			loaderInfo.addEventListener(IOErrorEvent.IO_ERROR, ioError);
 			
-			contentNameList = ["FirstContent","SecondContent","ThirdContent","FourthContent"];
+			contentNameList = ["FirstContent","SecondContent","ThirdContent","FourthContent","FifthContent","SixthContent"];
 			
 			// TODO show loader
 		}
