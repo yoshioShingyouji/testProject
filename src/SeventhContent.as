@@ -1,32 +1,30 @@
 package  
 {
 	import away3d.cameras.Camera3D;
-	import away3d.cameras.lenses.LensBase;
 	import away3d.containers.Scene3D;
 	import away3d.containers.View3D;
-	import away3d.core.partition.LightNode;
 	import away3d.entities.Mesh;
 	import away3d.lights.DirectionalLight;
-	import away3d.materials.ColorMaterial;
 	import away3d.materials.lightpickers.StaticLightPicker;
 	import away3d.materials.methods.EnvMapMethod;
 	import away3d.materials.TextureMaterial;
 	import away3d.primitives.CubeGeometry;
 	import away3d.primitives.SkyBox;
 	import away3d.textures.BitmapCubeTexture;
-	import away3d.textures.SpecularBitmapTexture;
 	import away3d.utils.Cast;
 	import fl.motion.easing.Bounce;
-	import fl.motion.easing.Exponential;
-	import fl.transitions.Tween;
-	import fl.transitions.TweenEvent;
 	import flash.events.Event;
 	import flash.geom.Vector3D;
+	import org.libspark.betweenas3.BetweenAS3;
+	import org.libspark.betweenas3.easing.Bounce;
+	import org.libspark.betweenas3.easing.Quad;
+	import org.libspark.betweenas3.tweens.ITween;
+	import org.libspark.betweenas3.events.TweenEvent;
 	/**
 	 * ...
 	 * @author Yoshio_SHINGYOUJI
 	 */
-	public class SixthContent extends ContentBase
+	public class SeventhContent extends ContentBase
 	{
 		
 		[Embed(source="/../embeds/cube_diffuse.jpg")]
@@ -62,7 +60,7 @@ package
 		private var degree		:int = 0;
 		private var tweenList	:Array = [];
 		
-		public function SixthContent() 
+		public function SeventhContent() 
 		{
 			
 		}
@@ -121,58 +119,35 @@ package
 						cube.z = i;
 						
 						var nextScale:Number = Math.random() * 1.9;
-						var scaleXTween:Tween = new Tween(cube, "scaleX", Bounce.easeInOut, cube.scaleX, nextScale, 1, true);
-						var scaleYTween:Tween = new Tween(cube, "scaleY", Bounce.easeInOut, cube.scaleX, nextScale, 1, true);
-						var scaleZTween:Tween = new Tween(cube, "scaleZ", Bounce.easeInOut, cube.scaleX, nextScale, 1, true);
-						scaleXTween.addEventListener(TweenEvent.MOTION_FINISH, motionFinishHandler);
-						scaleYTween.addEventListener(TweenEvent.MOTION_FINISH, motionFinishHandler);
-						scaleZTween.addEventListener(TweenEvent.MOTION_FINISH, motionFinishHandler);
-						tweenList.push(scaleXTween);
-						tweenList.push(scaleYTween);
-						tweenList.push(scaleZTween);
-						
+						var tween:ITween = BetweenAS3.tween(cube,  { scaleX:nextScale, scaleY:nextScale, scaleZ:nextScale }, { scaleX:cube.scaleX, scaleY:cube.scaleY, scaleZ:cube.scaleZ }, 1, Quad.easeInOut);
+						tween.addEventListener(TweenEvent.COMPLETE, tweenCompleteHandler, false, 0, true);
+						tweenList.push(tween);
+						tween.play();
 						
 						objectList.push(cube);
 						scene.addChild(cube);
-						
 					}
 				}
 			}
 			
 			this.addEventListener(Event.ENTER_FRAME, enterFrameHandler);
+		}
+		
+		private function tweenCompleteHandler(e:TweenEvent):void 
+		{
 			
-			
+			var target:Mesh = e.target.target as Mesh;
+			tweenList.splice(tweenList.indexOf(target), 1);
+			var nextScale:Number = Math.random() * 1.9;
+			var tween:ITween = BetweenAS3.tween(target,  { scaleX:nextScale, scaleY:nextScale, scaleZ:nextScale }, { scaleX:target.scaleX, scaleY:target.scaleY, scaleZ:target.scaleZ }, 1, Quad.easeInOut);
+			tween.addEventListener(TweenEvent.COMPLETE, tweenCompleteHandler, false, 0, true);
+			tween.play();
 		}
 		
 		override public function finalize():void
 		{
 			removeEventListener(Event.ENTER_FRAME, enterFrameHandler);
 			view.dispose();
-		}
-		
-		private function motionFinishHandler(e:TweenEvent):void 
-		{
-			
-			var target:Tween = e.target as Tween;
-			target.removeEventListener(TweenEvent.MOTION_FINISH, motionFinishHandler);
-			tweenList.splice(tweenList.indexOf(target), 1);
-			
-			if (target.prop == "scaleX") {
-				
-				var nextScale:Number = Math.random() * 1.9;
-				
-				var scaleXTween:Tween = new Tween(target.obj, "scaleX", target.func, target.obj[target.prop], nextScale, 1, true);
-				scaleXTween.addEventListener(TweenEvent.MOTION_FINISH, motionFinishHandler);
-				tweenList.push(scaleXTween);
-				
-				var scaleYTween:Tween = new Tween(target.obj, "scaleY", target.func, target.obj[target.prop], nextScale, 1, true);
-				scaleYTween.addEventListener(TweenEvent.MOTION_FINISH, motionFinishHandler);
-				tweenList.push(scaleYTween);
-				
-				var scaleZTween:Tween = new Tween(target.obj, "scaleZ", target.func, target.obj[target.prop], nextScale, 1, true);
-				scaleZTween.addEventListener(TweenEvent.MOTION_FINISH, motionFinishHandler);
-				tweenList.push(scaleZTween);
-			}
 		}
 		
 		private function enterFrameHandler(e:Event):void 

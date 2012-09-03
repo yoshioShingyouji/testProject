@@ -52,6 +52,7 @@
   <libraryPaths>
     <element path="lib\fl.swc" />
     <element path="lib\away3d-core-fp11_4_0_9_gold.swc" />
+    <element path="lib\BetweenAS3-Alpha-r3022-fp10.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
