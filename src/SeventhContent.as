@@ -71,7 +71,7 @@ package
 			var scene:Scene3D = new Scene3D();
 			camera = new Camera3D();
 			camera.x = 500;
-			camera.y = -800;
+			camera.y = -500;
 			camera.z = -1500;
 			
 			light1 = new DirectionalLight();
